@@ -1,0 +1,26 @@
+package pl.perfectsource.kogito.rules;
+
+unit First;
+
+import pl.perfectsource.kogito.ruleunit.RuleInput;
+import pl.perfectsource.kogito.ruleunit.RuleOutput1;
+
+import org.drools.ruleunits.api.DataSource;
+import org.drools.ruleunits.api.DataStream;
+import org.drools.ruleunits.api.RuleUnitData;
+
+declare First extends RuleUnitData
+    input: DataStream<RuleInput> = DataSource.createStream();
+    output: DataStream<RuleOutput1> = DataSource.createStream();
+end
+
+rule "Test1"
+when
+    /input [ test == "Hello" ];
+then
+    output.append(new RuleOutput1());
+end
+
+query First
+    out: /output
+end
